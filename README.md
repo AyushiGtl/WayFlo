@@ -6,7 +6,7 @@
 
 ### Place QR Codes
 
-Start by walking through your college and placing QR codes at important locations. These are your **hot points**:
+Start by walking through college and placing QR codes at important locations. These are **hot points**:
 
 - Entrance
 - Classrooms
@@ -19,7 +19,7 @@ Start by walking through your college and placing QR codes at important location
 
 Each QR code represents a **point in a map** and should be stuck where people make a choice — like a turn, entry, or junction.
 
-Tip: Use a printed QR with a room name below it.
+Use a printed QR with a room name below it.
 
 ---
 
