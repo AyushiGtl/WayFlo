@@ -1,0 +1,217 @@
+[
+    {
+        "id": 1,
+        "name": "main_gate",
+        "connections": [
+            {"to": 2, "distance": 17, "direction": "L"},
+            {"to": 4, "distance": 14, "direction": "R"}
+        ]
+    },
+    {
+        "id": 2,
+        "name": "reception",
+        "connections": [
+            {"to": 1, "distance": 17, "direction": "R"},
+            {"to": 3, "distance": 2, "direction": "L"}
+        ]
+    },
+    {
+        "id": 3,
+        "name": "office",
+        "connections": [
+            {"to": 2, "distance": 2, "direction": "B"},
+            {"to": 13, "distance": 11, "direction": "L"}
+        ]
+    },
+    {
+        "id": 13,
+        "name": "lift_1",
+        "connections": [
+            {"to": 3, "distance": 11, "direction": "R"},
+            {"to": 14, "distance": 12, "direction": "L"}
+        ]
+    },
+    {
+        "id": 14,
+        "name": "junction_5",
+        "connections": [
+            {"to": 15, "distance": 2, "direction": "F"},
+            {"to": 13, "distance": 12, "direction": "R"},
+            {"to": 17, "distance": 12, "direction": "L"}
+        ]
+    },
+    {
+        "id": 15,
+        "name": "library_stairs",
+        "connections": [
+            {"to": 14, "distance": 2, "direction": "R"},
+            {"to": 16, "distance": 22, "direction": "L"}
+        ]
+    },
+    {
+        "id": 16,
+        "name": "gate_2",
+        "connections": [
+            {"to": 15, "distance": 22, "direction": "B"}
+        ]
+    },
+    {
+        "id": 17,
+        "name": "library",
+        "connections": [
+            {"to": 14, "distance": 12, "direction": "R"},
+            {"to": 18, "distance": 12, "direction": "L"}
+        ]
+    },
+    {
+        "id": 18,
+        "name": "junction_4",
+        "connections": [
+            {"to": 17, "distance": 12, "direction": "B"},
+            {"to": 19, "distance": 6, "direction": "R"},
+            {"to": 20, "distance": 6, "direction": "F"},
+            {"to": 21, "distance": 18, "direction": "L"}
+        ]
+    },
+    {
+        "id": 21,
+        "name": "lift_2",
+        "connections": [
+            {"to": 18, "distance": 18, "direction": "F"},
+            {"to": 22, "distance": 2, "direction": "L"},
+            {"to": 28, "distance": 17, "direction": "B"}
+        ]
+    },
+    {
+        "id": 22,
+        "name": "drawroom_stairs",
+        "connections": [
+            {"to": 21, "distance": 2, "direction": "B"}
+        ]
+    },
+    {
+        "id": 19,
+        "name": "ladies_washroom",
+        "connections": [
+            {"to": 18, "distance": 6, "direction": "B"}
+        ]
+    },
+    {
+        "id": 20,
+        "name": "gents_washroom",
+        "connections": [
+            {"to": 18, "distance": 6, "direction": "B"}
+        ]
+    },
+    {
+        "id": 4,
+        "name": "class_001",
+        "connections": [
+            {"to": 5, "distance": 2, "direction": "R"},
+            {"to": 1, "distance": 14, "direction": "L"}
+        ]
+    },
+    {
+        "id": 5,
+        "name": "junction_1",
+        "connections": [
+            {"to": 6, "distance": 15, "direction": "F"},
+            {"to": 4, "distance": 2, "direction": "L"},
+            {"to": 8, "distance": 10, "direction": "B"}
+        ]
+    },
+    {
+        "id": 6,
+        "name": "class_002",
+        "connections": [
+            {"to": 5, "distance": 15, "direction": "B"}
+        ]
+    },
+    {
+        "id": 7,
+        "name": "class_003",
+        "connections": [
+            {"to": 6, "distance": 1, "direction": "B"}
+        ]
+    },
+    {
+        "id": 8,
+        "name": "junction_2",
+        "connections": [
+            {"to": 5, "distance": 10, "direction": "L"},
+            {"to": 9, "distance": 2, "direction": "F"},
+            {"to": 23, "distance": 4, "direction": "R"}
+        ]
+    }, 
+    {
+        "id": 9,
+        "name": "direct_stairs",
+        "connections": [
+            {"to": 8, "distance": 2, "direction": "L"},
+            {"to": 10, "distance": 7, "direction": "R"}
+        ]
+    },
+    {
+        "id": 10,
+        "name": "bms_room",
+        "connections": [
+            {"to": 9, "distance": 7, "direction": "L"},
+            {"to": 11, "distance": 10, "direction": "R"}
+        ]
+    },
+    {
+        "id": 11,
+        "name": "stationary",
+        "connections": [
+            {"to": 10, "distance": 10, "direction": "L"},
+            {"to": 12, "distance": 13, "direction": "R"}
+        ]
+    },
+    {
+        "id": 12,
+        "name": "gate_1",
+        "connections": [
+            {"to": 11, "distance": 13, "direction": "B"}
+        ]
+    },
+    {
+        "id": 23,
+        "name": "lift_3",
+        "connections": [
+            {"to": 8, "distance": 4, "direction": "L"},
+            {"to": 24, "distance": 9, "direction": "R"}
+        ]
+    },
+    {
+        "id": 24,
+        "name": "junction_3",
+        "connections": [
+            {"to": 23, "distance": 9, "direction": "L"},
+            {"to": 25, "distance": 2, "direction": "F"},
+            {"to": 26, "distance": 24, "direction": "R"}
+        ]
+    },
+    {
+        "id": 25,
+        "name": "cc_lab",
+        "connections": [
+            {"to": 24, "distance": 2, "direction": "R"}
+        ]
+    },
+    {
+        "id": 26,
+        "name": "parking_stairs",
+        "connections": [
+            {"to": 24, "distance": 24, "direction": "L"},
+            {"to": 28, "distance": 16, "direction": "B"}
+        ]
+    },
+    {
+        "id": 28,
+        "name": "drawing_room",
+        "connections": [
+            {"to": 26, "distance": 16, "direction": "L"},
+            {"to": 21, "distance": 17, "direction": "R"}
+        ]
+    }
+]
