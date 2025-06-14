@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WayFlo - Indoor Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .glass-effect {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-4 py-6 relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white bg-opacity-20 p-3 rounded-2xl backdrop-blur-sm">
+                        <i class="fas fa-route text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold tracking-tight">WayFlo</h1>
+                        <p class="text-purple-100 text-sm font-medium">Smart Indoor Navigation</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2 bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                    <i class="fas fa-university text-white"></i>
+                    <span class="text-white font-medium">College Campus</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Welcome Section -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold gradient-text mb-4">Choose Your Navigation Method</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Experience seamless indoor navigation with our advanced QR-based system or manual location selection</p>
+        </div>
+
+        <!-- Navigation Options -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- QR Code Scanner -->
+            <div class="glass-effect rounded-3xl shadow-xl border border-white/20 overflow-hidden card-hover">
+                <div class="bg-gradient-to-br from-blue-500 to-purple-600 p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="bg-white bg-opacity-20 p-4 rounded-2xl">
+                            <i class="fas fa-qrcode text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">Instant</span>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">QR Scan Navigation</h2>
+                    <p class="text-blue-100 mb-6">Simply scan a QR code at your location for instant positioning and smart route guidance</p>
+                </div>
+                <div class="p-6">
+                    <button id="startScan" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-2xl transition duration-300 flex items-center justify-center space-x-3 shadow-lg">
+                        <i class="fas fa-camera text-xl"></i>
+                        <span class="text-lg">Start QR Scanning</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Manual Navigation -->
+            <div class="glass-effect rounded-3xl shadow-xl border border-white/20 overflow-hidden card-hover">
+                <div class="bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="bg-white bg-opacity-20 p-4 rounded-2xl">
+                            <i class="fas fa-map-marked-alt text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">Flexible</span>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Manual Selection</h2>
+                    <p class="text-emerald-100 mb-6">Choose your current location and destination from our comprehensive location directory</p>
+                </div>
+                <div class="p-6">
+                    <button id="manualNav" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold py-4 px-6 rounded-2xl transition duration-300 flex items-center justify-center space-x-3 shadow-lg">
+                        <i class="fas fa-hand-pointer text-xl"></i>
+                        <span class="text-lg">Choose Locations</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Scanner Modal -->
+        <div id="qrModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="glass-effect rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-white/20">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-xl">
+                            <i class="fas fa-qrcode text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">QR Code Scanner</h3>
+                    </div>
+                    <button id="closeQR" class="text-gray-400 hover:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="qr-reader" class="w-full rounded-2xl overflow-hidden shadow-lg"></div>
+                <div id="qr-result" class="mt-6 hidden">
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-green-500 p-2 rounded-lg">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-green-800 font-semibold">QR Code Detected!</p>
+                                <p id="qr-data" class="text-green-700 text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manual Selection Modal -->
+        <div id="manualModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="glass-effect rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-white/20">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-3 rounded-xl">
+                            <i class="fas fa-map-marked-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Select Locations</h3>
+                    </div>
+                    <button id="closeManual" class="text-gray-400 hover:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-3">Current Location</label>
+                        <select id="fromLocation" class="w-full border-2 border-gray-200 rounded-2xl px-4 py-3 focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition text-lg">
+                            <option value="">Select your current location</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-3">Destination</label>
+                        <select id="toLocation" class="w-full border-2 border-gray-200 rounded-2xl px-4 py-3 focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition text-lg">
+                            <option value="">Select your destination</option>
+                        </select>
+                    </div>
+                    
+                    <button id="getDirections" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-2xl transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg">
+                        Get Navigation Route
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Destination Selection Modal (for QR scan) -->
+        <div id="destinationModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="glass-effect rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-white/20">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-xl">
+                            <i class="fas fa-flag-checkered text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Choose Destination</h3>
+                    </div>
+                    <button id="closeDestination" class="text-gray-400 hover:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-4 mb-6">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
+                            <div>
+                                <p class="text-blue-800 font-semibold">Current Location</p>
+                                <p id="currentLocationName" class="text-blue-700 text-lg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label class="block text-lg font-semibold text-gray-700 mb-3">Where do you want to go?</label>
+                    <select id="qrDestination" class="w-full border-2 border-gray-200 rounded-2xl px-4 py-3 focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition text-lg">
+                        <option value="">Select your destination</option>
+                    </select>
+                </div>
+                
+                <button id="getQRDirections" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-2xl transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg">
+                    Get Navigation Route
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center backdrop-blur-sm">
+            <div class="glass-effect rounded-3xl p-8 flex items-center space-x-4 shadow-2xl">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-purple-200 border-t-purple-600"></div>
+                <div>
+                    <p class="text-gray-800 font-semibold text-lg">Finding optimal route...</p>
+                    <p class="text-gray-600">Please wait a moment</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Results -->
+        <div id="navigationResults" class="glass-effect rounded-3xl shadow-2xl border border-white/20 hidden overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-white bg-opacity-20 p-3 rounded-xl">
+                            <i class="fas fa-route text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Navigation Route</h3>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="scanQRFromNav" class="flex items-center space-x-2 text-white hover:text-gray-200 p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                            <i class="fas fa-qrcode text-lg"></i>
+                            <span>Scan QR</span>
+                        </button>
+                        <button id="clearRoute" class="flex items-center space-x-2 text-white hover:text-gray-200 p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                            <i class="fas fa-redo text-lg"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <!-- Route Summary -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-2xl border border-blue-200 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                <span id="routeFrom" class="font-semibold text-blue-800"></span>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-400"></i>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-flag-checkered text-green-600"></i>
+                                <span id="routeTo" class="font-semibold text-green-800"></span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span id="routeSteps" class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold"></span>
+                            <span id="totalSteps" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-semibold"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center mb-6">
+                    <button id="startNavigation" class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold py-3 px-6 rounded-2xl transition duration-300 flex items-center space-x-2 shadow-lg">
+                        <i class="fas fa-play"></i>
+                        <span>Start Navigation</span>
+                    </button>
+                    
+                    <div id="navigationControls" class="hidden flex items-center space-x-4">
+                        <button id="prevStep" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Previous</span>
+                        </button>
+                        <button id="nextStep" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
+                            <span>Next</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="directions" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl p-6 hidden shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div class="bg-red-500 p-3 rounded-xl">
+                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-red-800 font-bold text-lg">Error Occurred</p>
+                    <p id="errorText" class="text-red-700"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
