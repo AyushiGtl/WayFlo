@@ -3,7 +3,8 @@
 
 A lightweight, QR-code-based indoor navigation system designed for colleges. This system helps students, visitors, and staff navigate complex indoor spaces using QR scans, shortest-path routing, and simple step-by-step directions.
 
-[Live Demo](https://wayflo-indoor-navigation.netlify.app/)
+<a href="https://wayflo-indoor-navigation.netlify.app/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+
 
 ---
 
@@ -155,8 +156,6 @@ Sample API Response:
 ## Live URLs
 **Frontend:** https://wayflo-indoor-navigation.netlify.app/
 
-**Backend API:**
-https://wayflo-1.onrender.com/route?id_from=FROM_ID&id_to=TO_ID
 
 ---
 ## Tech Stack
